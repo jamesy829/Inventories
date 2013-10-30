@@ -1,0 +1,19 @@
+<%= form_for @manufacturer do |f| %>
+  <% if @manufacturer.errors.any? %>
+    <div id="errorExplanation">
+      The form contains <%= pluralize(@manufacturer.errors.count, "error") %>.
+      <ul>
+      <% @manufacturer.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <p>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
