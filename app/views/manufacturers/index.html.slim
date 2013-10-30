@@ -1,0 +1,20 @@
+h1
+  | Listing Manufacturers
+table
+  tr
+    th
+      | Name
+    th
+      | Actions
+  - @manufacturers.each do |manufacturer|
+    tr
+      td
+        = manufacturer.name
+      td
+        = link_to 'Show', manufacturer_path(manufacturer)
+      td
+        = link_to 'Edit', edit_manufacturer_path(manufacturer)
+      td
+        | <%= link_to 'Delete', manufacturer_path(manufacturer), method: :delete, data: { confirm: 'Are you sure?' } %>
+br
+= link_to 'Add Manufacturer', new_manufacturer_path
