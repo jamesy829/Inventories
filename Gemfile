@@ -28,10 +28,15 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 
 # Unit test libraries
-gem 'rspec'
-gem 'rspec-rails', group: [:development, :test]
-gem 'database_cleaner', group: :test
-gem 'factory_girl_rails', group: :test
+group :development, :test do
+  gem 'rspec'
+  gem 'rspec-rails'
+end
+
+group :test do
+  gem 'database_cleaner'
+  gem 'factory_girl_rails'
+end
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
