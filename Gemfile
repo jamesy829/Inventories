@@ -3,8 +3,8 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
 
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+# Use postgreSQL as the database for Active Record
+gem 'pg'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -34,7 +34,14 @@ gem 'jbuilder', '~> 1.2'
 
 # Unit test libraries
 group :development, :test do
-  gem 'rspec'
+  # Use spork to boost rspec speec
+  gem 'guard-rspec'
+  gem 'guard-livereload'
+  gem 'spork-rails'
+  gem 'guard-spork'
+  gem 'childprocess'
+
+  # Use rspec for test framework
   gem 'rspec-rails'
 
   # Use pry for easier debugging
@@ -42,8 +49,10 @@ group :development, :test do
 end
 
 group :test do
+  gem 'shoulda-matchers'
   gem 'database_cleaner'
   gem 'factory_girl_rails'
+  gem 'nyan-cat-formatter'
 end
 
 group :doc do
