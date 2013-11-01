@@ -15,6 +15,11 @@ gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
 
+# replace erb with slim template
+gem 'slim'
+gem 'slim-rails'
+gem 'html2slim'
+
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
@@ -31,6 +36,9 @@ gem 'jbuilder', '~> 1.2'
 group :development, :test do
   gem 'rspec'
   gem 'rspec-rails'
+
+  # Use pry for easier debugging
+  gem 'pry'
 end
 
 group :test do
