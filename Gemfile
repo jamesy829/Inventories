@@ -21,7 +21,9 @@ gem 'slim-rails'
 gem 'html2slim'
 
 # Use pry for easier debugging
-gem 'pry', group: [:development, :test]
+group :development, :test do
+  gem 'pry'
+end
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
