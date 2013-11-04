@@ -8,7 +8,7 @@ describe Manufacturer do
 end
 
 
-describe 'something' do
+describe 'when creating a manufacturer' do
   before { visit new_manufacturer_path }
   let(:submit) { 'Create Manufacturer' }
 
