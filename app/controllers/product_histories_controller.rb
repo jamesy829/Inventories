@@ -1,8 +1,4 @@
 class ProductHistoriesController < ApplicationController
-  def index
-    @product_histories = ProductHistory.all
-  end
-
   def new
     @product_history = ProductHistory.new
   end
@@ -29,18 +25,6 @@ class ProductHistoriesController < ApplicationController
     else
       render 'edit'
     end
-  end
-
-  def show
-    @product_history = ProductHistory.find(params[:id])
-    @product = @product_history.product
-  end
-
-  def destroy
-    @product_history = ProductHistory.find(params[:id])
-    @product_history.destroy
-
-    redirect_to product_histories_path
   end
 
   private
