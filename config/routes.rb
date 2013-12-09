@@ -1,4 +1,6 @@
 Inventories::Application.routes.draw do
+  root 'manufacturers#index'
+
   resources :manufacturers
   
   # The priority is based upon order of creation: first created -> highest priority.
