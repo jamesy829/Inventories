@@ -28,6 +28,8 @@ ActiveRecord::Schema.define(version: 20131204133411) do
     t.datetime "updated_at"
   end
 
+  add_index "product_histories", ["product_id"], name: "index_product_histories_on_product_id", using: :btree
+
   create_table "products", force: true do |t|
     t.string   "name"
     t.float    "price"
