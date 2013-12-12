@@ -5,11 +5,12 @@
 img {
   @extend .img-responsive;
   margin: 0 auto;
-  }
+}
 // override for the 'Home' navigation link
 .navbar-brand {
-  font-size: inherit;
-  }
+  color: #fff;
+  // font-size: inherit;
+}
 
 // THESE ARE EXAMPLES YOU CAN MODIFY
 // create your own classes
@@ -17,29 +18,50 @@ img {
 .column {
   @extend .col-md-6;
   @extend .text-center;
-  }
+}
 .form {
   @extend .col-md-6;
-  }
+}
 .form-centered {
   @extend .col-md-6;
   @extend .text-center;
-  }
+}
 .submit {
   @extend .btn;
   @extend .btn-primary;
   @extend .btn-lg;
-  }
+}
 // apply styles to HTML elements
 // to make views framework-neutral
 main {
   @extend .container;
-  background-color: #eee;
-  padding-bottom: 80px;
+  // background-color: #eee;
+  padding-bottom: 30px;
   width: 100%;
-  margin-top: 51px; // accommodate the navbar
-  }
+  margin-top: 71px; // accommodate the navbar
+}
 section {
   @extend .row;
   margin-top: 20px;
-  }
+}
+@mixin button {
+  @extend .btn;
+  margin-right: 5px;
+}
+
+.default {
+  @include button;
+  @extend .btn-default;
+}
+.delete {
+  @include button;
+  @extend .btn-danger;
+}
+.primary {
+  @include button;
+  @extend .btn-primary;
+}
+.info {
+  @include button;
+  @extend .btn-info;
+}

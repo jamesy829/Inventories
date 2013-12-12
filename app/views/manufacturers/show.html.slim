@@ -1,4 +1,6 @@
-p
-  strong
-    | Name: 
-  = @manufacturer.name
+.page-header
+  h1
+    = @manufacturer.name
+
+hr
+= link_to 'Back', manufacturers_path, class: 'default'

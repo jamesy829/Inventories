@@ -1,20 +1,21 @@
-h1
-  | Listing Manufacturers
-table
-  tr
-    th
-      | Name
-    th
-      | Actions
-  - @manufacturers.each do |manufacturer|
-    tr id=manufacturer.name
-      td
-        = manufacturer.name
-      td
-        = link_to 'Show', manufacturer_path(manufacturer)
-      td
-        = link_to 'Edit', edit_manufacturer_path(manufacturer)
-      td
-        = link_to 'Delete', manufacturer_path(manufacturer), method: :delete, data: { confirm: 'Are you sure?' }
-br
-= link_to 'Add Manufacturer', new_manufacturer_path
+.page-header
+  h1
+    | Manufacturers
+  .table-responsive
+    table.table.table-border.table-hover
+      tr
+        th
+          | Name
+        th
+          | Actions
+      - @manufacturers.each do |manufacturer|
+        tr id=manufacturer.name
+          td
+            = manufacturer.name
+          td
+            = link_to 'Show', manufacturer_path(manufacturer), class: 'default'
+            = link_to 'Edit', edit_manufacturer_path(manufacturer), class: 'default'
+            = link_to 'Delete', manufacturer_path(manufacturer), method: :delete, 
+              data: { confirm: 'Are you sure?' }, class: 'delete'
+
+= link_to 'Add Manufacturer', new_manufacturer_path, class: 'primary'
