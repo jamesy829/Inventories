@@ -14,7 +14,8 @@
       = f.text_field :name, class: 'form-control', placeholder: 'Name'
   .form-group
     .col-sm-offset-2.col-sm-10
-      = f.submit 'Update', class: 'primary'
+      - msg = @manufacturer.new_record? ? 'Create Manufacturer' : 'Update Manufacturer'
+      = f.submit msg, class: 'primary'
       = link_to 'Back', manufacturers_path, class: 'default'
 
 hr
