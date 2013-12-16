@@ -41,4 +41,8 @@ ActiveRecord::Schema.define(version: 20131204133411) do
 
   add_index "products", ["manufacturer_id"], name: "index_products_on_manufacturer_id", using: :btree
 
+  add_foreign_key "product_histories", "products", name: "product_histories_product_id_fk"
+
+  add_foreign_key "products", "manufacturers", name: "products_manufacturer_id_fk"
+
 end

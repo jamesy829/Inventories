@@ -4,11 +4,9 @@ class CreateProductHistory < ActiveRecord::Migration
       t.datetime :date
       t.integer :price
       t.integer :count
-      t.references :product
-
+      t.references :product, index: true
+      t.foreign_key :products
       t.timestamps
     end
-
-    add_index :product_histories, :product_id
   end
 end
