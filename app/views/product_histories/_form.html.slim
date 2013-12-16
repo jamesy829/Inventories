@@ -1,0 +1,21 @@
+= form_for @product_history do |f|
+  - if @product_history.errors.any?
+    #errorExplanation
+      |  The form contains 
+      = pluralize(@product_history.errors.count, "error")
+      | . 
+      ul
+        - @product_history.errors.full_messages.each do |msg|
+          li
+            = msg
+  p
+    = f.label :date
+    = f.date_field :date
+  p
+    = f.label :price
+    = f.number_field :price, min: 0, step: '0.01'
+  p
+    = f.label :count
+    = f.number_field :count, min: 1
+  p
+    = f.submit

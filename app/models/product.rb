@@ -4,4 +4,5 @@ class Product < ActiveRecord::Base
   validates :sku_id, presence: true, uniqueness: true
 
   belongs_to :manufacturer
+  has_many :product_history
 end

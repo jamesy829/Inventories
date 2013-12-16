@@ -20,6 +20,9 @@ gem 'slim'
 gem 'slim-rails'
 gem 'html2slim'
 
+# Add foreign key
+gem 'foreigner'
+
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
