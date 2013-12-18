@@ -1,6 +1,7 @@
 Inventories::Application.routes.draw do
   resources :manufacturers
   resources :product_histories
+  resources :products
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -28,8 +28,6 @@ ActiveRecord::Schema.define(version: 20131204133411) do
     t.datetime "updated_at"
   end
 
-  add_index "product_histories", ["product_id"], name: "index_product_histories_on_product_id", using: :btree
-
   create_table "products", force: true do |t|
     t.string   "name"
     t.float    "price"
@@ -40,9 +38,5 @@ ActiveRecord::Schema.define(version: 20131204133411) do
   end
 
   add_index "products", ["manufacturer_id"], name: "index_products_on_manufacturer_id", using: :btree
-
-  add_foreign_key "product_histories", "products", name: "product_histories_product_id_fk"
-
-  add_foreign_key "products", "manufacturers", name: "products_manufacturer_id_fk"
 
 end
