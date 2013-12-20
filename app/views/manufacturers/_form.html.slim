@@ -1,4 +1,6 @@
-= form_for @manufacturer, html: { class: 'form-horizontal', role: 'form' } do |f|
+- msg = @manufacturer.new_record? ? 'Create Manufacturer' : 'Update Manufacturer'
+
+= form_for @manufacturer do |f|
   - if @manufacturer.errors.any?
     #errorExplanation
       |  The form contains 
@@ -8,14 +10,8 @@
         - @manufacturer.errors.full_messages.each do |msg|
           li
             = msg
-  .form-group
-    .col-sm-2.control-label= f.label :name
-    .col-sm-10
-      = f.text_field :name, class: 'form-control', placeholder: 'Name'
-  .form-group
-    .col-sm-offset-2.col-sm-10
-      - msg = @manufacturer.new_record? ? 'Create Manufacturer' : 'Update Manufacturer'
-      = f.submit msg, class: 'primary'
-      = link_to 'Back', manufacturers_path, class: 'default'
+  = f.text_field :name, placeholder: 'Name'
+
+  = f.submit msg, back_link: manufacturers_path
 
 hr

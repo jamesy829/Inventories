@@ -227,6 +227,7 @@ DEPENDENCIES
   html2slim
   jbuilder (~> 1.2)
   jquery-rails
+  nokogiri
   nyan-cat-formatter
   pg
   pry
