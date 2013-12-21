@@ -49,6 +49,7 @@ group :development, :test do
 
   # Use pry for easier debugging
   gem 'pry'
+  gem 'faker'
 end
 
 group :test do
