@@ -9,7 +9,7 @@ describe 'when creating a manufacturer' do
 
     it 'should redirects to manufacturer#show page' do
       expect { click_button submit }.to change(Manufacturer, :count)
-      expect(page).to have_content 'Name: Manufacturer Name'
+      expect(page).to have_content 'Manufacturer Name'
     end
   end
 
