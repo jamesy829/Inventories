@@ -3,7 +3,7 @@ class BootstrapFormBuilder < ActionView::Helpers::FormBuilder
     options = args.extract_options!
 
     @template.content_tag(:div, class: 'form-group') do
-      @template.content_tag(:div, class: 'col-sm-offset-2 col-sm-10') do
+      @template.content_tag(:div, class: 'col-sm-offset-1 col-sm-11') do
         super(label, *args << options.merge({ class: 'primary' })) +
         @template.content_tag(:a,
                               'Back',
@@ -37,8 +37,8 @@ class BootstrapFormBuilder < ActionView::Helpers::FormBuilder
         @template.content_tag('label',
                               customLabel,
                               for: "#{@object_name}_#{field}",
-                              class: 'col-sm-2 control-label') +
-        @template.content_tag(:div, class: 'col-sm-10') do
+                              class: 'col-sm-1 control-label') +
+        @template.content_tag(:div, class: 'col-sm-11') do
                               super(field, *args << options.merge({ class: 'form-control' })) +
                               errorSpan.html_safe
         end
