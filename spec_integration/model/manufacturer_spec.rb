@@ -9,7 +9,7 @@ describe 'when creating a manufacturer' do
 
     it 'should redirects to manufacturer#show page' do
       expect { click_button submit }.to change(Manufacturer, :count)
-      expect(page).to have_content 'Name: Manufacturer Name'
+      expect(page).to have_content 'Manufacturer Name'
     end
   end
 
@@ -17,7 +17,9 @@ describe 'when creating a manufacturer' do
     describe 'when name is blank' do
       it 'should return error message' do
         expect { click_button submit }.not_to change(Manufacturer, :count)
-        expect(page).to have_content "Name can't be blank"
+        error = page.has_selector?(:xpath,
+                                   "//input[@id='manufacturer_name']/../span[text()=\"can't be blank\"]")
+        expect(error).to be_true
       end
     end
 
@@ -26,7 +28,9 @@ describe 'when creating a manufacturer' do
 
       it 'should return error message' do
         expect { click_button submit }.not_to change(Manufacturer, :count)
-        expect(page).to have_content 'Name is too long (maximum is 256 characters)'
+        error = page.has_selector?(:xpath,
+                                   "//input[@id='manufacturer_name']/../span[text()='is too long (maximum is 256 characters)']")
+        expect(error).to be_true
       end
     end
   end 

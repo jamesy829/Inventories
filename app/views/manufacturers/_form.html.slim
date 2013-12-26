@@ -1,16 +1,14 @@
+- msg = @manufacturer.new_record? ? 'Create Manufacturer' : 'Update Manufacturer'
+
 = form_for @manufacturer do |f|
   - if @manufacturer.errors.any?
-    #errorExplanation
-      |  The form contains 
+    #errorExplanation.alert.alert-danger
+      | The form contains 
       = pluralize(@manufacturer.errors.count, "error")
-      | . 
-      ul
-        - @manufacturer.errors.full_messages.each do |msg|
-          li
-            = msg
-  p
-    = f.label :name
-    br
-    = f.text_field :name
-  p
-    = f.submit
+      | .
+
+  = f.text_field :name, placeholder: 'Name'
+
+  = f.submit msg, back_link: manufacturers_path
+
+hr

@@ -8,6 +8,7 @@ gem 'pg'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
+gem 'bootstrap-sass'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -19,6 +20,7 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'slim'
 gem 'slim-rails'
 gem 'html2slim'
+gem 'nokogiri'
 
 # Add foreign key
 gem 'foreigner'
@@ -49,6 +51,11 @@ group :development, :test do
 
   # Use pry for easier debugging
   gem 'pry'
+
+  # Bootstrap
+  gem 'rails_layout'
+
+  # Use faker to generate fake data
   gem 'faker'
 end
 
