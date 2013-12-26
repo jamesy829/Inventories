@@ -22,6 +22,9 @@ gem 'slim-rails'
 gem 'html2slim'
 gem 'nokogiri'
 
+# Add foreign key
+gem 'foreigner'
+
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
@@ -51,6 +54,9 @@ group :development, :test do
 
   # Bootstrap
   gem 'rails_layout'
+
+  # Use faker to generate fake data
+  gem 'faker'
 end
 
 group :test do
