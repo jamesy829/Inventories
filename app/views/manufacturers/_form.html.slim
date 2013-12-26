@@ -1,11 +1,7 @@
 - msg = @manufacturer.new_record? ? 'Create Manufacturer' : 'Update Manufacturer'
 
 = form_for @manufacturer do |f|
-  - if @manufacturer.errors.any?
-    #errorExplanation.alert.alert-danger
-      | The form contains 
-      = pluralize(@manufacturer.errors.count, "error")
-      | .
+  = render 'shared/form_errors', object: @manufacturer
 
   = f.text_field :name, placeholder: 'Name'
 
