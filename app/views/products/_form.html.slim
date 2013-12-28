@@ -1,17 +1,11 @@
 = form_for @product do |f|
   = render 'shared/form_errors', object: @product
 
-  p
-    = f.label :name
-    br
-    = f.text_field :name
-  p
-    = f.label :price
-    br
-    = f.number_field :price, min: 0, step: '0.01'
-  p
-    = f.label :sku_id, 'SKU Id'
-    br
-    = f.number_field :sku_id, min: 0, step: '0.01'
-  p
-    = f.submit
+  = f.text_field :name, placeholder: 'Name'
+
+  = f.number_field :price, placeholder: 'Price', min: 0, step: '0.01'
+
+  = f.number_field :sku_id, label: 'SKU Id', placeholder: 'SKU ID', min: 0, step: '0.01'
+  
+  = f.submit back_link: products_path
+hr
