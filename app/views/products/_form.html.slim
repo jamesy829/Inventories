@@ -1,13 +1,6 @@
 = form_for @product do |f|
-  - if @product.errors.any?
-    #errorExplanation
-      |  The form contains 
-      = pluralize(@product.errors.count, "error")
-      | . 
-      ul
-        - @product.errors.full_messages.each do |msg|
-          li
-            = msg
+  = render 'shared/form_errors', object: @product
+
   p
     = f.label :name
     br

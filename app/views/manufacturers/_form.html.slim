@@ -1,10 +1,8 @@
-- msg = @manufacturer.new_record? ? 'Create Manufacturer' : 'Update Manufacturer'
-
 = form_for @manufacturer do |f|
   = render 'shared/form_errors', object: @manufacturer
 
   = f.text_field :name, placeholder: 'Name'
 
-  = f.submit msg, back_link: manufacturers_path
+  = f.submit back_link: manufacturers_path
 
 hr

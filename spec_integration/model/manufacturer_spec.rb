@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'when creating a manufacturer' do
   before { visit new_manufacturer_path }
-  let(:submit) { 'Create Manufacturer' }
+  let(:submit) { 'Save' }
 
   describe 'with valid information' do
     before { fill_in 'manufacturer_name', with: 'Manufacturer Name' }
