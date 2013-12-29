@@ -16,7 +16,7 @@ describe 'when creating a product' do
   describe 'with valid information' do
     it 'should redirects to product#show page' do
       expect { click_button submit }.to change(Product, :count)
-      expect(page).to have_content "Name: #{name}"
+      expect(page).to have_content name
     end
   end
 
@@ -26,7 +26,9 @@ describe 'when creating a product' do
 
       it 'should return error message' do
         expect { click_button submit }.not_to change(Product, :count)
-        expect(page).to have_content "Name can't be blank"
+        error = page.has_selector?(:xpath,
+                                   "//input[@id='product_name']/../span[text()=\"can't be blank\"]")
+        expect(error).to be_true
       end
     end
 
@@ -35,7 +37,9 @@ describe 'when creating a product' do
 
       it 'should return error message' do
         expect { click_button submit }.not_to change(Product, :count)
-        expect(page).to have_content 'Name is too long (maximum is 256 characters)'
+        error = page.has_selector?(:xpath,
+                                   "//input[@id='product_name']/../span[text()='is too long (maximum is 256 characters)']")
+        expect(error).to be_true
       end
     end
 
@@ -44,7 +48,9 @@ describe 'when creating a product' do
 
       it 'should return error message' do
         expect { click_button submit }.not_to change(Product, :count)
-        expect(page).to have_content 'Price must be greater than or equal to 0'
+        error = page.has_selector?(:xpath,
+                                   "//input[@id='product_price']/../span[text()='must be greater than or equal to 0']")
+        expect(error).to be_true
       end
     end
 
@@ -53,7 +59,9 @@ describe 'when creating a product' do
 
       it 'should return error message' do
         expect { click_button submit }.not_to change(Product, :count)
-        expect(page).to have_content 'Sku must be greater than or equal to 0'
+        error = page.has_selector?(:xpath,
+                                   "//input[@id='product_sku_id']/../span[text()='must be greater than or equal to 0']")
+        expect(error).to be_true
       end
     end
 
@@ -65,7 +73,9 @@ describe 'when creating a product' do
 
         it 'should return error message' do
           expect { click_button submit }.not_to change(Product, :count)
-          expect(page).to have_content 'Name has already been taken'
+          error = page.has_selector?(:xpath,
+                                   "//input[@id='product_name']/../span[text()='has already been taken']")
+          expect(error).to be_true
         end
       end
 
@@ -74,7 +84,9 @@ describe 'when creating a product' do
 
         it 'should return error message' do
           expect { click_button submit }.not_to change(Product, :count)
-          expect(page).to have_content 'Sku has already been taken'
+          error = page.has_selector?(:xpath,
+                                   "//input[@id='product_sku_id']/../span[text()='has already been taken']")
+          expect(error).to be_true
         end
       end
     end
