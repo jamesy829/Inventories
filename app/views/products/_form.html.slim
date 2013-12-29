@@ -1,11 +1,8 @@
 - msg = @product.new_record? ? 'Create Product' : 'Update Product'
 
 = form_for @product do |f|
-  - if @product.errors.any?
-    #errorExplanation
-      |  The form contains 
-      = pluralize(@product.errors.count, "error")
-      | . 
+  = render 'shared/form_errors', object: @product
+
   = f.text_field :name, placeholder: 'Name'
 
   = f.number_field :price, placeholder: 'Price', min: 0, step: '0.01'
