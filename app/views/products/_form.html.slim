@@ -1,3 +1,5 @@
+- msg = @product.new_record? ? 'Create Product' : 'Update Product'
+
 = form_for @product do |f|
   = render 'shared/form_errors', object: @product
 
