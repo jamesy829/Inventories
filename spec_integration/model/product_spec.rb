@@ -43,6 +43,17 @@ describe 'when creating a product' do
       end
     end
 
+    describe 'when price is blank' do
+      let(:price) { '' }
+
+      it 'should return error message' do
+        expect { click_button submit }.not_to change(Product, :count)
+        error = page.has_selector?(:xpath,
+                                   "//input[@id='product_price']/../span[text()=\"can't be blank\"]")
+        expect(error).to be_true
+      end
+    end
+
     describe 'when price is negative' do
       let(:price) { -1 }
 
