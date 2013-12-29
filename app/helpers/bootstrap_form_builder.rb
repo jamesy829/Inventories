@@ -1,10 +1,10 @@
 class BootstrapFormBuilder < ActionView::Helpers::FormBuilder
-  def submit(label, *args)
+  def submit(*args)
     options = args.extract_options!
 
     @template.content_tag(:div, class: 'form-group') do
       @template.content_tag(:div, class: 'col-sm-offset-1 col-sm-11') do
-        super(label, *args << options.merge({ class: 'primary' })) +
+        super('Save', *args << options.merge({ class: 'primary' })) +
         @template.content_tag(:a,
                               'Back',
                               href: options[:back_link],
