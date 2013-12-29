@@ -16,7 +16,7 @@ describe 'when creating a product' do
   describe 'with valid information' do
     it 'should redirects to product#show page' do
       expect { click_button submit }.to change(Product, :count)
-      expect(page).to have_content "Name: #{name}"
+      expect(page).to have_content name
     end
   end
 
