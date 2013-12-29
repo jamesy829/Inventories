@@ -11,7 +11,7 @@ describe 'when creating a product' do
   let(:name) { Faker::Name.name }
   let(:price) { Faker::Number.number(5) }
   let(:sku_id) { Faker::Number.number(5) }
-  let(:submit) { 'Create Product' }
+  let(:submit) { 'Save' }
 
   describe 'with valid information' do
     it 'should redirects to product#show page' do

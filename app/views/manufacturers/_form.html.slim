@@ -1,5 +1,3 @@
-- msg = @manufacturer.new_record? ? 'Create Manufacturer' : 'Update Manufacturer'
-
 = form_for @manufacturer do |f|
   - if @manufacturer.errors.any?
     #errorExplanation.alert.alert-danger
@@ -9,6 +7,6 @@
 
   = f.text_field :name, placeholder: 'Name'
 
-  = f.submit msg, back_link: manufacturers_path
+  = f.submit back_link: manufacturers_path
 
 hr
