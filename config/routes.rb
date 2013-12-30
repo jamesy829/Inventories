@@ -2,8 +2,9 @@ Inventories::Application.routes.draw do
   root 'manufacturers#index'
 
   resources :manufacturers
-  resources :product_histories
-  resources :products
+  resources :products do
+    resources :histories, controller: 'product_histories'
+  end
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

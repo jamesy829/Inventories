@@ -1,17 +1,20 @@
 class ProductHistoriesController < ApplicationController
   def new
     @product_history = ProductHistory.new
+    @product = Product.find(params[:product_id])
   end
 
   def edit
     @product_history = ProductHistory.find(params[:id])
+    @product = Product.find(params[:product_id])
   end
 
   def create
     @product_history = ProductHistory.new(product_history_params)
+    @product = Product.find(params[:product_id])
 
     if @product_history.save
-      redirect_to @product_history
+      redirect_to @product
     else
       render 'new'
     end
@@ -30,6 +33,7 @@ class ProductHistoriesController < ApplicationController
   private
 
   def product_history_params
-    params.require(:product_history).permit(:date, :price, :count)
+    params.require(:product_history).merge('product_id' => params[:product_id])
+                                    .permit(:date, :price, :count, :product_id)
   end
 end

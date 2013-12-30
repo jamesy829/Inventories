@@ -5,5 +5,5 @@ class Product < ActiveRecord::Base
   # validates :manufacturer, presence: true
 
   belongs_to :manufacturer
-  has_many :product_history
+  has_many :product_histories
 end
