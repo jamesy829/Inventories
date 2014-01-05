@@ -47,7 +47,9 @@ class BootstrapFormBuilder < ActionView::Helpers::FormBuilder
     end
   end
 
-  field_helpers.each do |name|
+  basic_helpers = %w{text_field text_area select email_field password_field number_field}
+
+  (field_helpers + basic_helpers).each do |name|
     create_tagged_field(name)
   end
 
