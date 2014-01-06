@@ -5,6 +5,7 @@ describe ProductHistory do
     it { should validate_presence_of(:date) }
     it { should validate_presence_of(:count) }
     it { should validate_presence_of(:price) }
+    it { should validate_presence_of(:product) }
   end
 
   describe 'associations' do

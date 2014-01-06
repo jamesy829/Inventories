@@ -2,29 +2,30 @@
   h1
     = @product.name
   h4
-    | Product Details
+    | Product Histories
   .table-responsive
-    = link_to 'Add', new_product_history_path(@product), class: 'default'
-
+    = link_to 'Add', new_product_history_path(@product), class: 'primary'
     table.table.table-border.table-hover
-      tr
-        th
-          | Date
-        th
-          | Count
-        th
-          | Price
-        th
-          | Action
-      - @product_histories.each do |product_history|
-        tr id=product_history.date
-          td
-            = product_history.date.to_s(:short_month)
-          td
-            = product_history.count
-          td
-            = number_to_currency(product_history.price)
-          td
-            = link_to 'Edit', edit_product_history_path(@product.id, product_history.id), class: 'default'
+      thead
+        tr
+          th
+            | Date
+          th
+            | Count
+          th
+            | Price
+          th
+            | Action
+      tbody
+        - @product_histories.each do |product_history|
+          tr id=product_history.date
+            td
+              = product_history.date.to_s(:short_month)
+            td
+              = product_history.count
+            td
+              = number_to_currency(product_history.price)
+            td
+              = link_to 'Edit', edit_product_history_path(@product.id, product_history.id), class: 'default'
     
 = link_to 'Back', products_path, class: 'default'
