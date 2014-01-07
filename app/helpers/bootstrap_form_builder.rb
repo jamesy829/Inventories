@@ -1,6 +1,9 @@
 class BootstrapFormBuilder < ActionView::Helpers::FormBuilder
 
-  OTHER_HELPERS = %w{select}
+  FORM_HELPERS = %w{text_field password_field hidden_field file_field text_area color_field 
+                     search_field telephone_field phone_field date_field time_field
+                     datetime_field datetime_local_field month_field week_field url_field
+                     email_field number_field range_field select collection_select date_select}
 
   delegate :content_tag, to: :@template
 
@@ -52,7 +55,7 @@ class BootstrapFormBuilder < ActionView::Helpers::FormBuilder
     end
   end
 
-  (field_helpers + OTHER_HELPERS).each do |method_name|
+  FORM_HELPERS.each do |method_name|
     create_tagged_field(method_name)
   end
 
