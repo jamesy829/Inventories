@@ -1,12 +1,19 @@
 require 'spec_helper'
 
 describe 'when creating a product' do
+
+  let!(:manufacturer) { FactoryGirl.create(:manufacturer) }
+
   before(:each) do
     visit new_product_path
     fill_in 'product_name',   with: name
     fill_in 'product_price',  with: price
     fill_in 'product_sku_id', with: sku_id
+    puts manufacturer.name
+    select manufacturer.name, from: 'product_manufacturer_id'
   end
+
+  after(:all) { manufacturer.destroy }
 
   let(:name) { Faker::Name.name }
   let(:price) { Faker::Number.number(5) }
