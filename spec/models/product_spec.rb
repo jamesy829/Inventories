@@ -13,7 +13,7 @@ describe Product do
 
   describe 'associations' do
     it { should belong_to(:manufacturer) }
-    it { should have_many(:product_history) }
+    it { should have_many(:product_histories) }
   end
 
 end
