@@ -1,7 +1,7 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :product_History do
+  factory :product_history do
     date "2013-12-04 08:34:11"
     price 1
     count 1
