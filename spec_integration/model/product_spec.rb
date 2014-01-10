@@ -9,7 +9,6 @@ describe 'when creating a product' do
     fill_in 'product_name',   with: name
     fill_in 'product_price',  with: price
     fill_in 'product_sku_id', with: sku_id
-    puts manufacturer.name
     select manufacturer.name, from: 'product_manufacturer_id'
   end
 
@@ -56,7 +55,7 @@ describe 'when creating a product' do
       it 'should return error message' do
         expect { click_button submit }.not_to change(Product, :count)
         error = page.has_selector?(:xpath,
-                                   "//input[@id='product_price']/../span[text()=\"can't be blank\"]")
+                                   "//input[@id='product_price']/../span[contains(.,\"can't be blank\")]")
         expect(error).to be_true
       end
     end
@@ -124,4 +123,17 @@ describe 'when product is deleted', js: true do
     expect(page).to have_no_content @product.name
     expect(Product.count).to be < count
   end
+end
+
+describe 'when product is viewed' do
+  before(:each) do
+    @product = FactoryGirl.create(:product)
+    visit product_path(@product)
+  end
+
+  it 'should redirect to product#index' do
+    click_link 'Back'
+    find('h1').should have_content 'Products'
+  end
+
 end
