@@ -39,7 +39,18 @@ describe 'when creating a product history' do
       it 'should return error message' do
         expect { click_button submit }.not_to change(ProductHistory, :count)
         error = page.has_selector?(:xpath,
-                                   "//input[@id='product_history_count']/../span[text()=\"can't be blank\"]")
+                                   "//input[@id='product_history_count']/../span[contains(.,\"can't be blank\")]")
+        expect(error).to be_true
+      end
+    end
+
+    describe 'when count is negative' do
+      let(:count) { -1 }
+
+      it 'should return error message' do
+        expect { click_button submit }.not_to change(ProductHistory, :count)
+        error = page.has_selector?(:xpath,
+                                   "//input[@id='product_history_count']/../span[text()='must be greater than or equal to 0']")
         expect(error).to be_true
       end
     end
@@ -50,7 +61,18 @@ describe 'when creating a product history' do
       it 'should return error message' do
         expect { click_button submit }.not_to change(ProductHistory, :count)
         error = page.has_selector?(:xpath,
-                                   "//input[@id='product_history_price']/../span[text()=\"can't be blank\"]")
+                                   "//input[@id='product_history_price']/../span[contains(.,\"can't be blank\")]")
+        expect(error).to be_true
+      end
+    end
+
+    describe 'when price is negative' do
+      let(:price) { -1 }
+
+      it 'should return error message' do
+        expect { click_button submit }.not_to change(ProductHistory, :count)
+        error = page.has_selector?(:xpath,
+                                   "//input[@id='product_history_price']/../span[text()='must be greater than or equal to 0']")
         expect(error).to be_true
       end
     end

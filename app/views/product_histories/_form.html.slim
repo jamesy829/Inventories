@@ -1,5 +1,5 @@
 = form_for([@product, @product_history], url: { controller: 'product_histories', action: action }) do |f|
-  = render 'shared/form_errors', object: @product_history
+  = f.alert_message
 
   = f.date_field :date
 
