@@ -57,6 +57,8 @@ group :development, :test do
 
   # Use faker to generate fake data
   gem 'faker'
+
+  gem 'activerecord-import'
 end
 
 group :test do
