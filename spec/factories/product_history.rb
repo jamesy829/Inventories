@@ -2,9 +2,9 @@
 
 FactoryGirl.define do
   factory :product_history do
-    date "2013-12-04 08:34:11"
-    price 1
-    count 1
-    product_id 1
+    date { DateTime.now }
+    price { Faker::Number.number(2) }
+    count { Faker::Number.number(2) }
+    association :product 
   end
 end
