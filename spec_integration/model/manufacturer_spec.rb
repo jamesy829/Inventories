@@ -61,4 +61,9 @@ describe 'when manufacturer is viewed' do
     expect(page.has_link? 'Add Product').to be_true
   end
 
+  it 'should render add product form when add product link is clicked' do
+    click_link 'Add Product'
+    expect(page).to have_content 'New Product'
+  end
+
 end
