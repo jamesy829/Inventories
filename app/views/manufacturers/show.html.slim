@@ -2,6 +2,7 @@
   h1
     = @manufacturer.name
   .table-responsive
+    = link_to 'Add Product', new_product_path, class: 'primary'
     table.table.table-hover
       thead
         tr
