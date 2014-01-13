@@ -1,19 +1,21 @@
 require 'factory_girl_rails'
 require 'faker'
 require 'activerecord-import'
+require 'ruby-progressbar'
 
-a = Time.now
-puts "*************** Seeding Manufacturer *****************"
 manufacturers = []
+progress = ProgressBar.create(title: 'Manufacturer', starting_at: 0, total: 50)
+
 50.times do |i|
   manufacturers << Manufacturer.new(name: "#{Faker::Company.name} #{i}")
+  progress.increment
 end
 
 Manufacturer.import manufacturers
 
-puts "*************** Seeding Product *****************"
+progress = ProgressBar.create(title: 'Product', starting_at: 0, total: Manufacturer.count)
+
 Manufacturer.all.each do |m|
-  puts "**** Seeding Product for Manufacturer [#{m.id}] ***"
   products = []
 
   50.times do |i|
@@ -23,12 +25,13 @@ Manufacturer.all.each do |m|
                             manufacturer: m)
   end
 
+  progress.increment
   Product.import products
 end
 
-puts "*************** Seeding Product History *****************"
+progress = ProgressBar.create(title: 'Product History', starting_at: 0, total: Product.count)
+
 Product.all.each do |p|
-  puts "**** Seeding Product History for Product [#{p.id}] ***"
   histories = []
 
   50.times do |i|
@@ -38,8 +41,6 @@ Product.all.each do |p|
                                     product: p)
   end
 
+  progress.increment
   ProductHistory.import histories
 end
-b= Time.now
-
-puts b-a

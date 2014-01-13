@@ -59,6 +59,7 @@ group :development, :test do
   gem 'faker'
 
   gem 'activerecord-import'
+  gem 'ruby-progressbar'
 end
 
 group :test do
