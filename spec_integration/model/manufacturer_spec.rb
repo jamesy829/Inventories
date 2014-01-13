@@ -50,3 +50,15 @@ describe 'when manufacturer is deleted', js: true do
     expect(Manufacturer.count).to be < count
   end
 end
+
+describe 'when manufacturer is viewed' do
+  before do
+    @manufacturer = FactoryGirl.create(:manufacturer)
+    visit manufacturer_path(@manufacturer)
+  end
+
+  it 'should be able to see add product link' do
+    expect(page.has_link? 'Add Product').to be_true
+  end
+
+end
