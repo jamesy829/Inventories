@@ -57,6 +57,11 @@ group :development, :test do
 
   # Use faker to generate fake data
   gem 'faker'
+
+  # activerecord-import is a library for bulk inserting data using ActiveRecord.
+  gem 'activerecord-import'
+
+  gem 'ruby-progressbar'
 end
 
 group :test do
