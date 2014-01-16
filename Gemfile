@@ -37,6 +37,9 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
+# This gem integrates the Twitter Bootstrap pagination component with the will_paginate pagination gem.
+gem 'will_paginate-bootstrap'
+
 # Unit test libraries
 group :development, :test do
   # Use spork to boost rspec speec
