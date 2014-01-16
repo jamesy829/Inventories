@@ -4,7 +4,8 @@ module BootstrapForm
     FORM_HELPERS = %w{text_field password_field hidden_field file_field text_area color_field 
                       search_field telephone_field phone_field date_field time_field
                       datetime_field datetime_local_field month_field week_field url_field
-                      email_field number_field range_field select collection_select date_select}
+                      email_field number_field range_field select collection_select
+                      date_select time_select datetime_select}
 
     delegate :content_tag, to: :@template
 
