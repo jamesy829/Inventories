@@ -10,7 +10,7 @@
           th
             | Actions
       tbody
-        = will_paginate @manufacturers, renderer: BootstrapPagination::Rails
+        = will_paginate @manufacturers
         = render :partial => 'manufacturer', collection: @manufacturers
 
 br

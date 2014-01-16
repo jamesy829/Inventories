@@ -2,7 +2,7 @@ class ManufacturersController < ApplicationController
   before_filter :load_manufacturer, only: [:show, :edit, :update, :destroy]
 
   def index
-    @manufacturers = Manufacturer.all.paginate(page: 1, per_page: 10)
+    @manufacturers = Manufacturer.page(params[:page])
   end
 
   def new
