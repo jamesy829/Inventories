@@ -1,6 +1,8 @@
 require 'spec_helper'
-
 require "#{Rails.root}/lib/bootstrap_form/form_builder.rb"
+
+include ActionView::Helpers
+include ActionView::Context
 
 class DummyClass < ActiveRecord::Base
   def self.columns() @columns ||= []; end
@@ -21,8 +23,6 @@ class DummyClass < ActiveRecord::Base
 end
 
 describe BootstrapForm::FormBuilder do
-  include ActionView::Helpers
-  include ActionView::Context
 
   let(:dummy)   { stub_model(DummyClass, email: 'test@test.com', password: 'secret', comments: 'comments') }
   let(:builder) { described_class.new(:dummy, dummy, self, {}, nil) }
@@ -208,7 +208,15 @@ describe BootstrapForm::FormBuilder do
     pending 'datetime_select'
   end
 
-  describe '#' do
+  describe '#generate_label' do
+    context 'change label text' do
+      subject { builder.text_field :email, label: 'Test Label' }
+
+      it { should == %{<div class="form-group"><label class="col-sm-1 control-label" for="dummy_email">Test Label</label><div class="col-sm-11"><input class="form-control" id="dummy_email" name="dummy[email]" type="text" value="test@test.com" /></div></div>} }
+    end
+  end
+
+  describe '#generate_field' do
 
   end
 end
