@@ -217,6 +217,44 @@ describe BootstrapForm::FormBuilder do
   end
 
   describe '#generate_field' do
+    context 'with no prepend and append and help' do
+      subject { builder.text_field :email, label: 'Test Label' }
 
+      it { should == %{<div class="form-group"><label class="col-sm-1 control-label" for="dummy_email">Test Label</label><div class="col-sm-11"><input class="form-control" id="dummy_email" name="dummy[email]" type="text" value="test@test.com" /></div></div>} }
+    end
+
+    context 'with prepend and no append and help' do
+      subject { builder.text_field :email, label: 'Test Label', prepend: '@' }
+
+      it { should == %{<div class="form-group"><label class="col-sm-1 control-label" for="dummy_email">Test Label</label><div class="col-sm-11"><div class="input-group"><span class="input-group-addon">@</span><input class="form-control" id="dummy_email" name="dummy[email]" type="text" value="test@test.com" /></div></div></div>} }
+    end
+
+    context 'with no prepend and append and no help' do
+      subject { builder.text_field :email, label: 'Test Label', append: '@' }
+
+      it { should == %{<div class="form-group"><label class="col-sm-1 control-label" for="dummy_email">Test Label</label><div class="col-sm-11"><div class="input-group"><input class="form-control" id="dummy_email" name="dummy[email]" type="text" value="test@test.com" /><span class="input-group-addon">@</span></div></div></div>} }
+    end
+
+    context 'with prepend and append and no help' do
+      subject { builder.text_field :email, label: 'Test Label', prepend: '$', append: '@' }
+
+      it { should == %{<div class="form-group"><label class="col-sm-1 control-label" for="dummy_email">Test Label</label><div class="col-sm-11"><div class="input-group"><span class="input-group-addon">$</span><input class="form-control" id="dummy_email" name="dummy[email]" type="text" value="test@test.com" /><span class="input-group-addon">@</span></div></div></div>} }
+    end
+
+    context 'with no prepend and no append and no help' do
+      subject { builder.text_field :email, label: 'Test Label', help: 'This is an email field' }
+
+      it { should == %{<div class="form-group"><label class="col-sm-1 control-label" for="dummy_email">Test Label</label><div class="col-sm-11"><input class="form-control" id="dummy_email" name="dummy[email]" type="text" value="test@test.com" /><span class="help-block">This is an email field</span></div></div>} }
+    end
+
+    context 'with prepend and append and help' do
+      subject { builder.text_field :email, label: 'Test Label', prepend: '$', append: '@', help: 'This is an email field' }
+
+      it { should == %{<div class="form-group"><label class="col-sm-1 control-label" for="dummy_email">Test Label</label><div class="col-sm-11"><div class="input-group"><span class="input-group-addon">$</span><input class="form-control" id="dummy_email" name="dummy[email]" type="text" value="test@test.com" /><span class="input-group-addon">@</span></div><span class="help-block">This is an email field</span></div></div>} }
+    end
+  end
+
+  describe '#generate_submit' do
+    
   end
 end
