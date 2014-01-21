@@ -38,7 +38,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 
 # This gem integrates the Twitter Bootstrap pagination component with the will_paginate pagination gem.
-gem 'will_paginate-bootstrap'
+gem 'will_paginate-bootstrap', :git => 'https://github.com/majorvin/will_paginate-bootstrap.git'
 
 # Unit test libraries
 group :development, :test do

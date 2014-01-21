@@ -13,7 +13,7 @@ module ApplicationHelper
 
     with_bootstrap_form_field_error_proc do
       super(object, *(args << options), &block)
-    end
+    end 
   end
 
   # Always use the Twitter Bootstrap pagination renderer
@@ -24,6 +24,11 @@ module ApplicationHelper
     unless options[:renderer]
       options = options.merge :renderer => BootstrapPagination::Rails
     end
+
+    klass = ''
+    klass = 'pager' unless options[:class]
+    options[:class] = [klass, options[:class] ].join(' ')
+
     super *[collection_or_options, options].compact
   end
 

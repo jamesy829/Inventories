@@ -10,7 +10,7 @@
           th
             | Actions
       tbody
-        = will_paginate @manufacturers
+        = will_paginate @manufacturers, class: 'pagination'
         = render :partial => 'manufacturer', collection: @manufacturers
 
 br
