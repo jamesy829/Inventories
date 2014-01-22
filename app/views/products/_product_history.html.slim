@@ -1,0 +1,9 @@
+tr id=product_history.date
+  td
+    = product_history.date.to_s(:short_month)
+  td
+    = product_history.count
+  td
+    = number_to_currency(product_history.price)
+  td
+    = link_to 'Edit', edit_product_history_path(@product.id, product_history.id), class: 'default'

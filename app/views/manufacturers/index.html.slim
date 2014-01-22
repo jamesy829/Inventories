@@ -10,8 +10,8 @@
           th
             | Actions
       tbody
-        = will_paginate @manufacturers, class: 'pagination'
-        = render :partial => 'manufacturer', collection: @manufacturers
+        = will_paginate @manufacturers
+        = render partial: 'manufacturer', collection: @manufacturers
 
 br
 = link_to 'Add Manufacturer', new_manufacturer_path, class: 'primary'

@@ -113,10 +113,10 @@ end
 describe 'when product is deleted', js: true do
   before(:each) do
     @product = FactoryGirl.create(:product)
-    visit products_path
+    visit manufacturer_path(@product.manufacturer)
   end
 
-  it 'should redirects to product#index and product is removed' do
+  it 'should redirects to manufacturer and product is removed' do
     count = Product.count
     within(:xpath, "//tr[@id='#{@product.name}']") { click_link 'Delete' } 
     page.driver.browser.switch_to.alert.accept
@@ -131,9 +131,9 @@ describe 'when product is viewed' do
     visit product_path(@product)
   end
 
-  it 'should redirect to product#index' do
+  it 'should redirect to manufacturer' do
     click_link 'Back'
-    find('h1').should have_content 'Products'
+    find('h1').should have_content @product.manufacturer.name
   end
 
 end

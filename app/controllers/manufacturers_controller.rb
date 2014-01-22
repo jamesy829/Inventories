@@ -31,7 +31,7 @@ class ManufacturersController < ApplicationController
   end
 
   def show
-    @products = @manufacturer.products
+    @products = @manufacturer.products.page(params[:page])
   end
 
   def destroy

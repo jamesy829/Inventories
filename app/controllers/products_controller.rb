@@ -33,14 +33,14 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
-    @product_histories = @product.product_histories.order_by_date
+    @product_histories = @product.product_histories.order_by_date.page(params[:page])
   end
 
   def destroy
     @product = Product.find(params[:id])
     @product.destroy
 
-    redirect_to products_path
+    redirect_to manufacturer_path(@product.manufacturer)
   end
 
   private

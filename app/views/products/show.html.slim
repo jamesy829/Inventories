@@ -17,15 +17,7 @@
           th
             | Action
       tbody
-        - @product_histories.each do |product_history|
-          tr id=product_history.date
-            td
-              = product_history.date.to_s(:short_month)
-            td
-              = product_history.count
-            td
-              = number_to_currency(product_history.price)
-            td
-              = link_to 'Edit', edit_product_history_path(@product.id, product_history.id), class: 'default'
+        = will_paginate @product_histories
+        = render partial: 'product_history', collection: @product_histories
 
-= link_to 'Back', products_path, class: 'default'
+= link_to 'Back', manufacturer_path(@product.manufacturer), class: 'default'
