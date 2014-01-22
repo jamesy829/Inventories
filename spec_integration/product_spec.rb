@@ -135,5 +135,40 @@ describe 'when product is viewed' do
     click_link 'Back'
     find('h1').should have_content @product.manufacturer.name
   end
+end
 
+describe 'pagination' do
+  before(:each) { FactoryGirl.create_list(:product, 30, manufacturer: manufacturer) }
+
+  let(:manufacturer) { FactoryGirl.create(:manufacturer) }
+
+  context 'on first page' do
+    before(:each) { visit manufacturer_path(manufacturer) }
+
+    it 'previous button is disabled' do
+      page.has_selector?(:xpath, "//ul[contains(@class,'pager')]//li[@class='previous disabled']") == true
+    end
+
+    it 'clicking next should go back next page', js: true do
+      html = page.html
+      click_link 'Next'
+      wait_for_ajax
+      page.html.should_not == html
+    end
+  end
+
+  context 'on last page' do
+    before(:each) { visit "#{manufacturer_path(manufacturer)}?page=3" }
+
+    it 'next button is disabled' do
+      page.has_selector?(:xpath, "//ul[contains(@class,'pager')]//li[@class='next disabled']") == true
+    end
+
+    it 'clicking back should go back on previous page', js: true do
+      html = page.html
+      click_link 'Previous'
+      wait_for_ajax
+      page.html.should_not == html
+    end
+  end
 end
