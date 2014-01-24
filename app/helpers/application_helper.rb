@@ -1,6 +1,6 @@
 module ApplicationHelper
   # Globally display 10 items per page
-  WillPaginate.per_page = 10
+  WillPaginate.per_page = CONFIG[:will_paginate]['per_page']
 
   BOOTSTRAP_FIELD_ERROR_PROC = Proc.new do |html_tag, instance|
     html_tag
@@ -22,7 +22,7 @@ module ApplicationHelper
       options, collection_or_options = collection_or_options, nil
     end
     unless options[:renderer]
-      options = options.merge :renderer => BootstrapPagination::Rails
+      options = options.merge renderer: BootstrapPagination::Rails
     end
 
     klass = ''

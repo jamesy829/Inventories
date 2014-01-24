@@ -1,0 +1,23 @@
+.page-header
+  h1
+    | Products
+  .table-responsive
+    table.table.table-hover
+      thead
+        tr
+          th
+            | Name
+          th
+            | Actions
+      tbody
+        - @products.each do |product|
+          tr id=product.name
+            td
+              = product.name
+            td
+              = link_to 'Show', product_path(product), class: 'default'
+              = link_to 'Edit', edit_product_path(product), class: 'default'
+              = link_to 'Delete', product_path(product), method: :delete,
+                data: { confirm: 'Are you sure?' }, class: 'delete'
+br
+= link_to 'Add Product', new_product_path, class: 'primary'
