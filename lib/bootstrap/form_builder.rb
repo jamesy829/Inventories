@@ -1,4 +1,4 @@
-module BootstrapForm
+module Bootstrap
   class FormBuilder < ActionView::Helpers::FormBuilder
 
     FORM_HELPERS = %w{text_field password_field hidden_field file_field text_area color_field 
@@ -68,6 +68,8 @@ module BootstrapForm
     private
 
     def normalize_args!(method_name, args)
+      return unless method_name =~ /select/
+
       if method_name == "select"
         args << {} while args.length < 3
       elsif method_name == "collection_select"

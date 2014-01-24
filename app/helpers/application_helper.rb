@@ -6,7 +6,7 @@ module ApplicationHelper
   def form_for(object, *args, &block)
     options = args.extract_options!
     options.merge!(html: { class: 'form-horizontal', role: 'form' })
-    options.merge!(builder: BootstrapForm::FormBuilder)
+    options.merge!(builder: Bootstrap::FormBuilder)
 
     with_bootstrap_form_field_error_proc do
       super(object, *(args << options), &block)

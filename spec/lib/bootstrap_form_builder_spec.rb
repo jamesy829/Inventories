@@ -1,5 +1,5 @@
 require 'spec_helper'
-require "#{Rails.root}/lib/bootstrap_form/form_builder.rb"
+require "#{Rails.root}/lib/bootstrap/form_builder.rb"
 
 include ActionView::Helpers
 include ActionView::Context
@@ -22,7 +22,7 @@ class DummyClass < ActiveRecord::Base
   validates :email, presence: true
 end
 
-describe BootstrapForm::FormBuilder do
+describe Bootstrap::FormBuilder do
 
   let(:dummy)   { stub_model(DummyClass, email: 'test@test.com', password: 'secret', comments: 'comments') }
   let(:builder) { described_class.new(:dummy, dummy, self, {}, nil) }
