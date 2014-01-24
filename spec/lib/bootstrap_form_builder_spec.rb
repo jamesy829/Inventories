@@ -206,6 +206,8 @@ describe BootstrapForm::FormBuilder do
     pending 'date_select'
     pending 'time_select'
     pending 'datetime_select'
+    pending 'radio_buttons'
+    pending 'check_box'
   end
 
   describe '#generate_label' do
@@ -217,6 +219,9 @@ describe BootstrapForm::FormBuilder do
   end
 
   describe '#generate_field' do
+    let(:dummy)   { stub_model(DummyClass, email: 'test@test.com', password: 'secret', comments: 'comments') }
+    let(:builder) { described_class.new(:dummy, dummy, self, {}, nil) }
+
     context 'with no prepend and append and help' do
       subject { builder.text_field :email, label: 'Test Label' }
 
@@ -252,9 +257,50 @@ describe BootstrapForm::FormBuilder do
 
       it { should == %{<div class="form-group"><label class="col-sm-1 control-label" for="dummy_email">Test Label</label><div class="col-sm-11"><div class="input-group"><span class="input-group-addon">$</span><input class="form-control" id="dummy_email" name="dummy[email]" type="text" value="test@test.com" /><span class="input-group-addon">@</span></div><span class="help-block">This is an email field</span></div></div>} }
     end
+
+    context 'with error, help do not display' do
+      before(:each) do
+        dummy.email= nil
+        dummy.valid?
+      end
+
+      subject { builder.text_field :email, help: 'This is an email field' }
+
+      it { should == %{<div class="form-group has-error"><label class="col-sm-1 control-label" for="dummy_email">Email</label><div class="col-sm-11"><div class="field_with_errors"><input class="form-control" id="dummy_email" name="dummy[email]" type="text" /></div><span class="help-block">can&#39;t be blank</span></div></div>} }
+    end
+
+    context 'with prepend and error' do
+      before(:each) do
+        dummy.email= nil
+        dummy.valid?
+      end
+
+      subject { builder.text_field :email, prepend: '$', help: 'This is an email field' }
+
+      it { should == %{<div class="form-group has-error"><label class="col-sm-1 control-label" for="dummy_email">Email</label><div class="col-sm-11"><div class="input-group"><span class="input-group-addon">$</span><div class="field_with_errors"><input class="form-control" id="dummy_email" name="dummy[email]" type="text" /></div></div><span class="help-block">can&#39;t be blank</span></div></div>} }
+    end
+
+    context 'with append and error' do
+      before(:each) do
+        dummy.email= nil
+        dummy.valid?
+      end
+
+      subject { builder.text_field :email, append: '@', help: 'This is an email field' }
+
+      it { should == %{<div class="form-group has-error"><label class="col-sm-1 control-label" for="dummy_email">Email</label><div class="col-sm-11"><div class="input-group"><div class="field_with_errors"><input class="form-control" id="dummy_email" name="dummy[email]" type="text" /></div><span class="input-group-addon">@</span></div><span class="help-block">can&#39;t be blank</span></div></div>} }
+    end
+
+    context 'with prepend and append and error' do
+      before(:each) do
+        dummy.email= nil
+        dummy.valid?
+      end
+
+      subject { builder.text_field :email, prepend: '$', append: '@', help: 'This is an email field' }
+
+      it { should == %{<div class="form-group has-error"><label class="col-sm-1 control-label" for="dummy_email">Email</label><div class="col-sm-11"><div class="input-group"><span class="input-group-addon">$</span><div class="field_with_errors"><input class="form-control" id="dummy_email" name="dummy[email]" type="text" /></div><span class="input-group-addon">@</span></div><span class="help-block">can&#39;t be blank</span></div></div>} }
+    end
   end
 
-  describe '#generate_submit' do
-    
-  end
 end
