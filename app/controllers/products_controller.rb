@@ -40,7 +40,8 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
     @product.destroy
 
-    redirect_to manufacturer_path(@product.manufacturer)
+    url = URI(request.referrer).path ==  '/products' ? products_path : manufacturer_path(@product.manufacturer)
+    redirect_to url
   end
 
   private
