@@ -25,9 +25,7 @@ module ApplicationHelper
       options = options.merge renderer: BootstrapPagination::Rails
     end
 
-    klass = ''
-    klass = 'pager' unless options[:class]
-    options[:class] = [klass, options[:class] ].join(' ')
+    options[:class] = 'pager' unless options[:class]
 
     super *[collection_or_options, options].compact
   end

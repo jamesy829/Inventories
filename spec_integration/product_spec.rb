@@ -143,7 +143,7 @@ describe 'pagination' do
   let(:manufacturer) { FactoryGirl.create(:manufacturer) }
 
   context 'on first page' do
-    before(:each) { visit manufacturer_path(manufacturer) }
+    before(:each) { visit products_path }
 
     it 'previous button is disabled' do
       page.has_selector?(:xpath, "//ul[contains(@class,'pager')]//li[@class='previous disabled']") == true
@@ -158,7 +158,7 @@ describe 'pagination' do
   end
 
   context 'on last page' do
-    before(:each) { visit "#{manufacturer_path(manufacturer)}?page=3" }
+    before(:each) { visit "#{products_path}?page=3" }
 
     it 'next button is disabled' do
       page.has_selector?(:xpath, "//ul[contains(@class,'pager')]//li[@class='next disabled']") == true

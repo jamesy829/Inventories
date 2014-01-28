@@ -68,35 +68,73 @@ describe 'when manufacturer is viewed' do
 end
 
 describe 'pagination' do
-  before(:each) { FactoryGirl.create_list(:manufacturer, 30) }
+  context '#index' do
+    before(:each) { FactoryGirl.create_list(:manufacturer, 30) }
 
-  context 'on first page' do
-    before(:each) { visit manufacturers_path }
+    context 'on first page' do
+      before(:each) { visit manufacturers_path }
 
-    it 'previous button is disabled' do
-      page.has_selector?(:xpath, "//ul[contains(@class,'pager')]//li[@class='previous disabled']") == true
+      it 'previous button is disabled' do
+        page.has_selector?(:xpath, "//ul[contains(@class,'pager')]//li[@class='previous disabled']") == true
+      end
+
+      it 'clicking next should go back next page', js: true do
+        html = page.html
+        click_link 'Next'
+        wait_for_ajax
+        page.html.should_not == html
+      end
     end
 
-    it 'clicking next should go back next page', js: true do
-      html = page.html
-      click_link 'Next'
-      wait_for_ajax
-      page.html.should_not == html
+    context 'on last page' do
+      before(:each) { visit "#{manufacturers_path}?page=3" }
+
+      it 'next button is disabled' do
+        page.has_selector?(:xpath, "//ul[contains(@class,'pager')]//li[@class='next disabled']") == true
+      end
+
+      it 'clicking back should go back on previous page', js: true do
+        html = page.html
+        click_link 'Previous'
+        wait_for_ajax
+        page.html.should_not == html
+      end
     end
   end
 
-  context 'on last page' do
-    before(:each) { visit "#{manufacturers_path}?page=3" }
+  context '#show' do
+    before(:each) { FactoryGirl.create_list(:product, 30, manufacturer: manufacturer) }
 
-    it 'next button is disabled' do
-      page.has_selector?(:xpath, "//ul[contains(@class,'pager')]//li[@class='next disabled']") == true
+    let(:manufacturer) { FactoryGirl.create(:manufacturer) }
+
+    context 'on first page' do
+      before(:each) { visit manufacturer_path(manufacturer) }
+
+      it 'previous button is disabled' do
+        page.has_selector?(:xpath, "//ul[contains(@class,'pager')]//li[@class='previous disabled']") == true
+      end
+
+      it 'clicking next should go back next page', js: true do
+        html = page.html
+        click_link 'Next'
+        wait_for_ajax
+        page.html.should_not == html
+      end
     end
 
-    it 'clicking back should go back on previous page', js: true do
-      html = page.html
-      click_link 'Previous'
-      wait_for_ajax
-      page.html.should_not == html
+    context 'on last page' do
+      before(:each) { visit "#{manufacturer_path(manufacturer)}?page=3" }
+
+      it 'next button is disabled' do
+        page.has_selector?(:xpath, "//ul[contains(@class,'pager')]//li[@class='next disabled']") == true
+      end
+
+      it 'clicking back should go back on previous page', js: true do
+        html = page.html
+        click_link 'Previous'
+        wait_for_ajax
+        page.html.should_not == html
+      end
     end
   end
 end
