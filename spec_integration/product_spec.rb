@@ -110,18 +110,33 @@ describe 'when creating a product' do
   end 
 end
 
-describe 'when product is deleted', js: true do
-  before(:each) do
-    @product = FactoryGirl.create(:product)
-    visit manufacturer_path(@product.manufacturer)
+describe 'product is deleted', js: true do
+  before(:each) { @product = FactoryGirl.create(:product) }
+
+  context 'when the page is on manufacturer#show' do
+    before(:each) { visit manufacturer_path(@product.manufacturer) }
+
+    it 'should redirects to manufacturer and product is removed' do
+      count = Product.count
+      within(:xpath, "//tr[@id='#{@product.name}']") { click_link 'Delete' } 
+      page.driver.browser.switch_to.alert.accept
+      expect(page).to have_no_content @product.name
+      expect(Product.count).to be < count
+      expect(page).to have_content @product.manufacturer.name
+    end
   end
 
-  it 'should redirects to manufacturer and product is removed' do
-    count = Product.count
-    within(:xpath, "//tr[@id='#{@product.name}']") { click_link 'Delete' } 
-    page.driver.browser.switch_to.alert.accept
-    expect(page).to have_no_content @product.name
-    expect(Product.count).to be < count
+   context 'when the page is on product#index' do
+    before(:each) { visit products_path }
+
+    it 'should redirects to product#index and product is removed' do
+      count = Product.count
+      within(:xpath, "//tr[@id='#{@product.name}']") { click_link 'Delete' } 
+      page.driver.browser.switch_to.alert.accept
+      expect(page).to have_no_content @product.name
+      expect(Product.count).to be < count
+      expect(page).to have_content 'Products'
+    end
   end
 end
 
