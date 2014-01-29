@@ -78,3 +78,39 @@ describe 'when creating a product history' do
     end
   end
 end
+
+describe 'pagination' do
+  before(:each) { FactoryGirl.create_list(:product_history, 30, product: product) }
+
+  let(:product) { FactoryGirl.create(:product) }
+
+  context 'on first page' do
+    before(:each) { visit product_path(product) }
+
+    it 'previous button is disabled' do
+      page.has_selector?(:xpath, "//ul[contains(@class,'pager')]//li[@class='previous disabled']") == true
+    end
+
+    it 'clicking next should go back next page', js: true do
+      html = page.html
+      click_link 'Next'
+      wait_for_ajax
+      page.html.should_not == html
+    end
+  end
+
+  context 'on last page' do
+    before(:each) { visit "#{product_path(product)}?page=3" }
+
+    it 'next button is disabled' do
+      page.has_selector?(:xpath, "//ul[contains(@class,'pager')]//li[@class='next disabled']") == true
+    end
+
+    it 'clicking back should go back on previous page', js: true do
+      html = page.html
+      click_link 'Previous'
+      wait_for_ajax
+      page.html.should_not == html
+    end
+  end
+end

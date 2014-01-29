@@ -110,18 +110,33 @@ describe 'when creating a product' do
   end 
 end
 
-describe 'when product is deleted', js: true do
-  before(:each) do
-    @product = FactoryGirl.create(:product)
-    visit products_path
+describe 'product is deleted', js: true do
+  before(:each) { @product = FactoryGirl.create(:product) }
+
+  context 'when the page is on manufacturer#show' do
+    before(:each) { visit manufacturer_path(@product.manufacturer) }
+
+    it 'should redirects to manufacturer and product is removed' do
+      count = Product.count
+      within(:xpath, "//tr[@id='#{@product.name}']") { click_link 'Delete' } 
+      page.driver.browser.switch_to.alert.accept
+      expect(page).to have_no_content @product.name
+      expect(Product.count).to be < count
+      expect(page).to have_content @product.manufacturer.name
+    end
   end
 
-  it 'should redirects to product#index and product is removed' do
-    count = Product.count
-    within(:xpath, "//tr[@id='#{@product.name}']") { click_link 'Delete' } 
-    page.driver.browser.switch_to.alert.accept
-    expect(page).to have_no_content @product.name
-    expect(Product.count).to be < count
+   context 'when the page is on product#index' do
+    before(:each) { visit products_path }
+
+    it 'should redirects to product#index and product is removed' do
+      count = Product.count
+      within(:xpath, "//tr[@id='#{@product.name}']") { click_link 'Delete' } 
+      page.driver.browser.switch_to.alert.accept
+      expect(page).to have_no_content @product.name
+      expect(Product.count).to be < count
+      expect(page).to have_content 'Products'
+    end
   end
 end
 
@@ -131,9 +146,44 @@ describe 'when product is viewed' do
     visit product_path(@product)
   end
 
-  it 'should redirect to product#index' do
+  it 'should redirect to manufacturer' do
     click_link 'Back'
-    find('h1').should have_content 'Products'
+    find('h1').should have_content @product.manufacturer.name
+  end
+end
+
+describe 'pagination' do
+  before(:each) { FactoryGirl.create_list(:product, 30, manufacturer: manufacturer) }
+
+  let(:manufacturer) { FactoryGirl.create(:manufacturer) }
+
+  context 'on first page' do
+    before(:each) { visit products_path }
+
+    it 'previous button is disabled' do
+      page.has_selector?(:xpath, "//ul[contains(@class,'pager')]//li[@class='previous disabled']") == true
+    end
+
+    it 'clicking next should go back next page', js: true do
+      html = page.html
+      click_link 'Next'
+      wait_for_ajax
+      page.html.should_not == html
+    end
   end
 
+  context 'on last page' do
+    before(:each) { visit "#{products_path}?page=3" }
+
+    it 'next button is disabled' do
+      page.has_selector?(:xpath, "//ul[contains(@class,'pager')]//li[@class='next disabled']") == true
+    end
+
+    it 'clicking back should go back on previous page', js: true do
+      html = page.html
+      click_link 'Previous'
+      wait_for_ajax
+      page.html.should_not == html
+    end
+  end
 end

@@ -1,4 +1,7 @@
 module ApplicationHelper
+  # Globally display 10 items per page
+  WillPaginate.per_page = CONFIG[:will_paginate]['per_page']
+
   BOOTSTRAP_FIELD_ERROR_PROC = Proc.new do |html_tag, instance|
     html_tag
   end
@@ -10,7 +13,21 @@ module ApplicationHelper
 
     with_bootstrap_form_field_error_proc do
       super(object, *(args << options), &block)
+    end 
+  end
+
+  # Always use the Twitter Bootstrap pagination renderer
+  def will_paginate(collection_or_options = nil, options = {})
+    if collection_or_options.is_a? Hash
+      options, collection_or_options = collection_or_options, nil
     end
+    unless options[:renderer]
+      options = options.merge renderer: BootstrapPagination::Rails
+    end
+
+    options[:class] = 'pager' unless options[:class]
+
+    super *[collection_or_options, options].compact
   end
 
 private

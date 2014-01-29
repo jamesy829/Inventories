@@ -1,0 +1,8 @@
+tr id=manufacturer.name
+  td
+    = manufacturer.name
+  td
+    = link_to 'Show', manufacturer_path(manufacturer), class: 'default'
+    = link_to 'Edit', edit_manufacturer_path(manufacturer), class: 'default'
+    = link_to 'Delete', manufacturer_path(manufacturer), method: :delete, 
+      data: { confirm: 'Are you sure?' }, class: 'delete'

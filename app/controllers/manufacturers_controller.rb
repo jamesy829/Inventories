@@ -2,7 +2,7 @@ class ManufacturersController < ApplicationController
   before_filter :load_manufacturer, only: [:show, :edit, :update, :destroy]
 
   def index
-    @manufacturers = Manufacturer.all
+    @manufacturers = Manufacturer.page(params[:page])
   end
 
   def new
@@ -31,7 +31,7 @@ class ManufacturersController < ApplicationController
   end
 
   def show
-    @products = @manufacturer.products
+    @products = @manufacturer.products.page(params[:page])
   end
 
   def destroy

@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   def index
-    @products = Product.all
+    @products = Product.page(params[:page])
   end
 
   def new
@@ -33,14 +33,15 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
-    @product_histories = @product.product_histories.order_by_date
+    @product_histories = @product.product_histories.order_by_date.page(params[:page])
   end
 
   def destroy
     @product = Product.find(params[:id])
     @product.destroy
 
-    redirect_to products_path
+    url = URI(request.referrer).path ==  '/products' ? products_path : manufacturer_path(@product.manufacturer)
+    redirect_to url
   end
 
   private
