@@ -79,7 +79,13 @@ module Bootstrap
       end
     end
 
+    def find_field_name(field)
+      association = field.to_s.humanize.downcase.to_sym
+      object.class.reflections[association] ? association : field
+    end
+
     def has_error?(field)
+      field = find_field_name(field)
       !(object.errors[field].empty? || object.nil?)
     end
 
@@ -112,6 +118,7 @@ module Bootstrap
     end
 
     def generate_help_or_error(field, help_or_error_text)
+      field = find_field_name(field)
       help_or_error_text = object.errors[field].join(', ') if has_error?(field)
       content_tag(:span, help_or_error_text, class: 'help-block') if help_or_error_text
     end
