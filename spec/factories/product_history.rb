@@ -1,10 +1,10 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :product_history do
+  factory :histories, class: ProductHistory do
     date { DateTime.now }
     price { Faker::Number.number(2) }
     count { Faker::Number.number(2) }
-    association :product 
+    association :product, factory: :products
   end
 end
