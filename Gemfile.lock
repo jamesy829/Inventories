@@ -242,6 +242,7 @@ DEPENDENCIES
   childprocess
   coffee-rails (~> 4.0.0)
   database_cleaner
+  execjs
   factory_girl_rails
   faker
   foreigner
