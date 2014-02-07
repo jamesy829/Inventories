@@ -74,6 +74,9 @@ group :test do
   gem 'nyan-cat-formatter'
   gem 'capybara'
   gem 'selenium-webdriver'
+
+  # Test Coverage
+  gem 'simplecov', require: false
 end
 
 group :doc do
