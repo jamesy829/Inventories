@@ -11,4 +11,22 @@ nav.navbar.navbar-inverse.navbar-fixed-top[role='navigation']
       = link_to 'Home', root_path, class: 'navbar-brand'
     .collapse.navbar-collapse
       ul.nav.navbar-nav
-        = render 'layouts/navigation_links'
+        - if user_signed_in?
+          = render 'layouts/navigation_links'
+      ul.nav.navbar-nav.navbar-right
+        - if user_signed_in?
+          li.dropdown
+            a.dropdown-toggle data-toggle='dropdown' href='#'
+              = current_user.email
+              b.caret
+            ul.dropdown-menu
+              li= link_to 'Edit Profile', edit_user_registration_path
+              li= link_to 'Logout', destroy_user_session_path, method: :delete
+        - else
+          li.dropdown
+            a.dropdown-toggle data-toggle='dropdown' href='#'
+              | Not Logged In?
+              b.caret
+            ul.dropdown-menu
+              li= link_to 'Sign In', new_user_session_path
+              li= link_to 'Sign Up', new_user_registration_path

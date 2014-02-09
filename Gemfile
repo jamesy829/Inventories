@@ -33,6 +33,9 @@ gem 'slim-rails'
 gem 'html2slim'
 gem 'nokogiri'
 
+# Add devise for authentication system
+gem 'devise'
+
 # Add foreign key
 gem 'foreigner'
 
