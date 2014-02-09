@@ -57,6 +57,12 @@ describe 'when manufacturer is viewed' do
     visit manufacturer_path(@manufacturer)
   end
 
+  context 'on overview' do
+    subject { find('div#overview') }
+
+    it { should have_content @manufacturer.name }
+  end
+
   it 'should be able to see add product link' do
     expect(page.has_link? 'Add Product').to be_true
   end

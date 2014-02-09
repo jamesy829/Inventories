@@ -141,14 +141,25 @@ describe 'product is deleted', js: true do
 end
 
 describe 'when product is viewed' do
+  include ActionView::Helpers::NumberHelper
+
   before(:each) do
     @product = FactoryGirl.create(:product)
     visit product_path(@product)
   end
 
+  context 'on overview' do
+    subject { find('div#overview') }
+
+    it { should have_content @product.name }
+    it { should have_content number_to_currency(@product.price) }
+    it { should have_content @product.sku_id }
+    it { should have_content @product.manufacturer.name }
+  end
+
   it 'should redirect to manufacturer' do
     click_link 'Back'
-    find('h1').should have_content @product.manufacturer.name
+    find('div#overview').should have_content @product.manufacturer.name
   end
 end
 

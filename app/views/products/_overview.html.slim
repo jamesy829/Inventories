@@ -1,0 +1,28 @@
+.panel.panel-info id='overview'
+  .panel-heading.center
+    | 
+  table.table.text-center
+    tr
+      td
+        b
+          | Name
+      td
+        = @product.name
+    tr
+      td
+        b
+          | Price
+      td
+        = number_to_currency(@product.price)
+    tr
+      td
+        b
+          | Sku Id
+      td
+        = @product.sku_id
+    tr
+      td
+        b
+          | Manufacturer
+      td
+        = @product.manufacturer.name
