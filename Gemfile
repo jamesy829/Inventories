@@ -13,10 +13,6 @@ gem 'bootstrap-sass'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
-# Fix cloudbees issues with execjs
-gem 'therubyracer'
-gem 'execjs'
-
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
 
@@ -78,6 +74,10 @@ group :test do
   gem 'nyan-cat-formatter'
   gem 'capybara'
   gem 'selenium-webdriver'
+
+  # Fix cloudbees issues with execjs
+  gem 'therubyracer'
+  gem 'execjs'
 
   # Test Coverage
   gem 'simplecov', require: false
