@@ -75,6 +75,10 @@ group :test do
   gem 'capybara'
   gem 'selenium-webdriver'
 
+  # Fix cloudbees issues with execjs
+  gem 'therubyracer'
+  gem 'execjs'
+
   # Test Coverage
   gem 'simplecov', require: false
 end
