@@ -167,7 +167,7 @@ describe 'pagination' do
   before(:each) { FactoryGirl.create_list(:product, 30, manufacturer: manufacturer) }
 
   let(:manufacturer) { FactoryGirl.create(:manufacturer) }
-  let(:wait) { Selenium::WebDriver::Wait.new(:timeout => 10) }
+  let(:wait) { Selenium::WebDriver::Wait.new }
 
   context 'on first page' do
     before(:each) { visit products_path }

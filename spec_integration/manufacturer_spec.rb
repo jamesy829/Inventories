@@ -74,7 +74,7 @@ describe 'when manufacturer is viewed' do
 end
 
 describe 'pagination' do
-  let(:wait) { Selenium::WebDriver::Wait.new(:timeout => 10) }
+  let(:wait) { Selenium::WebDriver::Wait.new }
   
   context '#index' do
     before(:each) { FactoryGirl.create_list(:manufacturer, 30) }

@@ -83,7 +83,7 @@ describe 'pagination' do
   before(:each) { FactoryGirl.create_list(:product_history, 30, product: product) }
 
   let(:product) { FactoryGirl.create(:product) }
-  let(:wait) { Selenium::WebDriver::Wait.new(:timeout => 10) }
+  let(:wait) { Selenium::WebDriver::Wait.new }
 
   context 'on first page' do
     before(:each) { visit product_path(product) }
