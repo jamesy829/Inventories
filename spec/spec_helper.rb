@@ -6,6 +6,8 @@ require 'spork'
 Spork.prefork do
   unless ENV['DRB']
     require 'simplecov'
+    require 'coveralls'
+    Coveralls.wear!
     SimpleCov.start 'rails'
   end
 

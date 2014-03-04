@@ -81,6 +81,7 @@ group :test do
 
   # Test Coverage
   gem 'simplecov', require: false
+  gem 'coveralls', require: false
 end
 
 group :doc do
