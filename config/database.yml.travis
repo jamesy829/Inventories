@@ -1,0 +1,4 @@
+test:
+  adapter: postgresql 
+  database: inventories_test
+  username: postgres
