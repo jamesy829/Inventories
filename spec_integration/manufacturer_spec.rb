@@ -87,7 +87,7 @@ describe 'pagination' do
       it 'clicking next should go back next page', js: true do
         html = page.html
         click_link 'Next'
-        wait_for_ajax
+        @wait.until { page.has_css?("li[class='previous']") }
         page.html.should_not == html
       end
     end
@@ -102,7 +102,7 @@ describe 'pagination' do
       it 'clicking back should go back on previous page', js: true do
         html = page.html
         click_link 'Previous'
-        wait_for_ajax
+        @wait.until { page.has_css?("li[class='next']") }
         page.html.should_not == html
       end
     end
@@ -123,7 +123,7 @@ describe 'pagination' do
       it 'clicking next should go back next page', js: true do
         html = page.html
         click_link 'Next'
-        wait_for_ajax
+        @wait.until { page.has_css?("li[class='previous']") }
         page.html.should_not == html
       end
     end
@@ -138,7 +138,7 @@ describe 'pagination' do
       it 'clicking back should go back on previous page', js: true do
         html = page.html
         click_link 'Previous'
-        wait_for_ajax
+        @wait.until { page.has_css?("li[class='next']") }
         page.html.should_not == html
       end
     end

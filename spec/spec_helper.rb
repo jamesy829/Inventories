@@ -67,6 +67,11 @@ Spork.prefork do
     config.before(:suite) do
       DatabaseCleaner.strategy = :truncation
     end
+
+    config.before(:all) do
+      @wait = Selenium::WebDriver::Wait.new
+    end
+
     config.before(:each) do
       DatabaseCleaner.start
     end
