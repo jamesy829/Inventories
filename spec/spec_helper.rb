@@ -23,7 +23,11 @@ Spork.prefork do
   require 'database_cleaner'
   require 'faker'
   require 'capybara/rspec'
+  require 'capybara/rails'
+  require "sauce_helper"
 
+  Capybara.default_driver = :sauce
+  Capybara.javascript_driver = :sauce
   Capybara.default_wait_time  = 10
   # Requires supporting ruby files with custom matchers and macros, etc,
   # in spec/support/ and its subdirectories.

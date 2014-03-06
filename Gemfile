@@ -54,6 +54,10 @@ group :development, :test do
 
   # Use rspec for test framework
   gem 'rspec-rails'
+  gem 'sauce', '~> 3.1.1'
+  gem 'sauce-connect'
+  gem 'capybara'
+  gem 'parallel_tests'
 
   # Use pry for easier debugging
   gem 'pry'
@@ -75,7 +79,6 @@ group :test do
   gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'nyan-cat-formatter'
-  gem 'capybara'
   gem 'selenium-webdriver'
 
   # Fix cloudbees issues with execjs
