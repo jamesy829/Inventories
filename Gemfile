@@ -1,7 +1,15 @@
 source 'https://rubygems.org'
 
+ruby "2.1.0"
+
+#ruby=ruby-2.1.0
+#ruby-gemset=Inventories
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
+
+# Use passenger for web service layer
+gem 'passenger'
 
 # Use postgreSQL as the database for Active Record
 gem 'pg'
@@ -86,6 +94,9 @@ group :test do
   gem 'simplecov', require: false
   gem 'coveralls', require: false
 end
+
+# Serve static assets and logging on Heroku
+gem 'rails_12factor', group: :production
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
