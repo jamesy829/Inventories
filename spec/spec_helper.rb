@@ -4,19 +4,14 @@ require 'spork'
 #require 'spork/ext/ruby-debug'
 
 Spork.prefork do
-    require 'simplecov'
-    require 'coveralls'
-    SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
-      Coveralls::SimpleCov::Formatter,
-      SimpleCov::Formatter::HTMLFormatter
-    ]
-    Coveralls.wear!
-    SimpleCov.start 'rails' do
-      root '/'
-      project_name 'Inventories'
-
-      add_group 'Integration', 'spec_integration'
-    end
+  require 'simplecov'
+  require 'coveralls'
+  SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
+    Coveralls::SimpleCov::Formatter,
+    SimpleCov::Formatter::HTMLFormatter
+  ]
+  Coveralls.wear!
+  SimpleCov.start 'rails'
 
   # Loading more in this block will cause your tests to run faster. However,
   # if you change any configuration or code from libraries loaded here, you'll
