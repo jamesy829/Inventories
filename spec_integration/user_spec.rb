@@ -100,4 +100,37 @@ describe 'User', js: true do
       end
     end
   end
+
+  describe 'when forget password' do
+    before(:each) do
+      visit new_user_password_path
+      fill_in 'user_email', with: email
+      click_button submit
+    end
+
+    let(:user) { FactoryGirl.create(:user) }
+    let(:email) { user.email }
+    let(:submit)  { 'Send me reset password instructions' }
+
+    # need to configure to send stub email for integration test
+    pending 'with valid information' do
+      it 'should show flash message' do
+        message = page.has_selector?(:xpath,
+                                     "//div[@id='flash_notice'][text()=\"You will receive an email with instructions about how to reset your password in a few minutes.\"]")
+        expect(message).to be_true
+      end
+    end
+
+    describe 'with invalid information' do
+      context 'when email is blank' do
+        let(:email) { '' }
+
+        it 'should return error message' do
+          error = page.has_selector?(:xpath,
+                                    "//input[@id='user_email']/../span[text()=\"can't be blank\"]")
+          expect(error).to be_true
+        end
+      end
+    end
+  end
 end
