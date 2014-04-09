@@ -4,12 +4,14 @@ require 'spork'
 #require 'spork/ext/ruby-debug'
 
 Spork.prefork do
-  unless ENV['DRB']
-    require 'simplecov'
-    require 'coveralls'
-    Coveralls.wear!
-    SimpleCov.start 'rails'
-  end
+  require 'simplecov'
+  require 'coveralls'
+  SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
+    Coveralls::SimpleCov::Formatter,
+    SimpleCov::Formatter::HTMLFormatter
+  ]
+  Coveralls.wear!
+  SimpleCov.start 'rails'
 
   # Loading more in this block will cause your tests to run faster. However,
   # if you change any configuration or code from libraries loaded here, you'll
@@ -23,11 +25,14 @@ Spork.prefork do
   require 'database_cleaner'
   require 'faker'
   require 'capybara/rspec'
+  require 'capybara'
+  require 'capybara/dsl'
 
   Capybara.default_wait_time  = 10
   # Requires supporting ruby files with custom matchers and macros, etc,
   # in spec/support/ and its subdirectories.
   Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
+  Dir[Rails.root.join("spec_integration/lib/**/*.rb")].each { |f| require f }
 
   # Checks for pending migrations before tests are run
  # If you are not using ActiveRecord, you can remove this line.
@@ -62,6 +67,9 @@ Spork.prefork do
     # the seed, which is printed after each run.
     #     --seed 1234
     config.order = "random"
+
+    config.include Devise::TestHelpers, type: :controller
+    config.extend ControllerMacros, type: :controller
 
     # Clean up the database
     config.before(:suite) do

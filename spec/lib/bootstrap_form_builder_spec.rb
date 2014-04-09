@@ -207,7 +207,23 @@ describe Bootstrap::FormBuilder do
     pending 'time_select'
     pending 'datetime_select'
     pending 'radio_buttons'
-    pending 'check_box'
+    context 'check_box is wrapped correctly' do
+      subject { builder.check_box :misc }
+
+      it { should == %{<div class="form-group"><div class="col-sm-offset-1 col-sm-11"><div class="checkbox"><label for="dummy_misc"><input name="dummy[misc]" type="hidden" value="0" /><input id="dummy_misc" name="dummy[misc]" type="checkbox" value="1" /> Misc</label></div></div></div>} }
+    end
+
+    context 'check_box has custom label' do
+      subject { builder.check_box :misc, label: "Misc Label" }
+
+      it { should == %{<div class="form-group"><div class="col-sm-offset-1 col-sm-11"><div class="checkbox"><label for="dummy_misc"><input name="dummy[misc]" type="hidden" value="0" /><input id="dummy_misc" name="dummy[misc]" type="checkbox" value="1" /> Misc Label</label></div></div></div>} }
+    end
+
+    context 'check_box has checked and unchecked arguments' do
+      subject { builder.check_box :misc, {}, 'yes', 'no' }
+
+      it { should == %{<div class="form-group"><div class="col-sm-offset-1 col-sm-11"><div class="checkbox"><label for="dummy_misc"><input name="dummy[misc]" type="hidden" value="no" /><input id="dummy_misc" name="dummy[misc]" type="checkbox" value="yes" /> Misc</label></div></div></div>} }
+    end
   end
 
   describe '#generate_label' do

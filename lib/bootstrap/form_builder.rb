@@ -42,9 +42,9 @@ module Bootstrap
     def self.create_tagged_field(method_name)
       define_method(method_name) do |field, *args, &help_block|
         normalize_args!(method_name, args)
-        options = args.extract_options!
+        options = args.extract_options!.symbolize_keys!
 
-        label = options.delete(:label)
+        custom_label = options.delete(:label)
         help = options.delete(:help)
         prepend = options.delete(:prepend)
         append = options.delete(:append)
@@ -55,8 +55,28 @@ module Bootstrap
         input = super(field, *args << options.merge({ class: 'form-control' }))
 
         content_tag(:div, class: wrapper_class) do
-          generate_label(field, label: label) +
+          generate_label(field, label: custom_label) +
           generate_field(field, input, help: help, prepend: prepend, append: append)
+        end
+      end
+    end
+
+    def check_box(field, options = {}, checked_value = '1', unchecked_value = '0')
+      options = options.symbolize_keys!
+
+      custom_label = options.delete(:label)
+
+      wrapper_class = 'form-group'
+      wrapper_class << ' has-error' if has_error?(field)
+
+      input = super(field, options, checked_value, unchecked_value)
+      input << find_label_name(field, label: custom_label)
+
+      content_tag(:div, class: wrapper_class) do
+        content_tag(:div, class: 'col-sm-offset-1 col-sm-11') do
+          content_tag(:div, class: 'checkbox') do
+            label(field, input)
+          end
         end
       end
     end
@@ -77,6 +97,10 @@ module Bootstrap
       elsif method_name =~ /_select/
         args << {} while args.length < 2
       end
+    end
+
+    def find_label_name(field, options)
+      ' ' + (options[:label] || object.class.human_attribute_name(field) || field.to_s.humanize)
     end
 
     def find_field_name(field)

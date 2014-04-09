@@ -1,0 +1,10 @@
+.page-header
+  h1
+    | Forgot your password?
+
+= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+  = f.email_field :email, autofocus: true
+
+  = f.submit button: "Send me reset password instructions", back_link: root_path
+
+= render "devise/shared/links"
