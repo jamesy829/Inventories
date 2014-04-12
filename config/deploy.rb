@@ -41,14 +41,19 @@ set :pty, true
 # Default value for keep_releases is 5
 set :keep_releases, 3
 
+before "deploy", "deploy:setup"
+after "deploy", "deploy:restart"
+after "deploy", "deploy:cleanup"
+
 namespace :deploy do
 
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
       # Your restart mechanism here, for example:
-      # execute :touch, release_path.join('tmp/restart.txt')
-      execute "sudo /etc/init.d/nginx restart"
+      execute :touch, release_path.join('tmp/restart.txt')
+      # Restart nginx
+      # execute "sudo /etc/init.d/nginx restart"
     end
   end
 
