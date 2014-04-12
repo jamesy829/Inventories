@@ -57,6 +57,12 @@ gem 'will_paginate-bootstrap', git: 'https://github.com/majorvin/will_paginate-b
 # Use faker to generate fake data
 gem 'faker'
 
+# activerecord-import is a library for bulk inserting data using ActiveRecord.
+gem 'activerecord-import'
+
+# Progress bar for reporting status
+gem 'ruby-progressbar'
+
 # Unit test libraries
 group :development, :test do
   # Use spork to boost rspec speec
@@ -76,11 +82,6 @@ group :development, :test do
   gem 'rails_layout'
 
   gem 'factory_girl_rails'
-
-  # activerecord-import is a library for bulk inserting data using ActiveRecord.
-  gem 'activerecord-import'
-
-  gem 'ruby-progressbar'
 end
 
 group :test do
