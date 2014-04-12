@@ -73,7 +73,7 @@ group :development, :test do
   gem 'rails_layout'
 
   # Use faker to generate fake data
-  gem 'faker'
+  gem 'faker', require: false
   gem 'factory_girl_rails'
 
   # activerecord-import is a library for bulk inserting data using ActiveRecord.
