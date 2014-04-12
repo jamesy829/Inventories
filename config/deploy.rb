@@ -41,7 +41,7 @@ set :pty, true
 # Default value for keep_releases is 5
 set :keep_releases, 3
 
-before "deploy", "deploy:setup"
+after "deploy", "deploy:migrate"
 after "deploy", "deploy:restart"
 after "deploy", "deploy:cleanup"
 
