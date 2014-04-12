@@ -73,7 +73,8 @@ group :development, :test do
   gem 'rails_layout'
 
   # Use faker to generate fake data
-  gem 'faker', require: false
+  gem 'faker'
+  gem 'factory_girl_rails'
 
   # activerecord-import is a library for bulk inserting data using ActiveRecord.
   gem 'activerecord-import'
@@ -84,7 +85,6 @@ end
 group :test do
   gem 'shoulda-matchers'
   gem 'database_cleaner'
-  gem 'factory_girl_rails'
   gem 'nyan-cat-formatter'
   gem 'capybara'
   gem 'selenium-webdriver'
@@ -98,8 +98,18 @@ group :test do
   gem 'coveralls', require: false
 end
 
-# Serve static assets and logging on Heroku
-gem 'rails_12factor', group: :production
+group :production do
+  # Serve static assets and logging on Heroku
+  gem 'rails_12factor'
+
+  gem 'capistrano', '~> 3.1'
+  # rails specific capistrano funcitons
+  gem 'capistrano-rails', '~> 1.1'
+  # integrate bundler with capistrano
+  gem 'capistrano-bundler', '~> 1.1.2'
+  # integrate rvm with capistrano
+  gem 'capistrano-rvm'
+end
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

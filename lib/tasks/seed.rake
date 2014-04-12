@@ -1,11 +1,10 @@
-require 'factory_girl_rails'
 require 'faker'
 require 'activerecord-import'
 require 'ruby-progressbar'
 
 namespace :seed do
   desc 'Drop and recreate database and run seed data'
-  task :all =>  [
+  task all: [
                   'db:reset',
                   'seed:manufacturer',
                   'seed:product',
@@ -13,7 +12,7 @@ namespace :seed do
                 ]
 
   desc 'Seed Manufacturer'
-  task :manufacturer => :environment do
+  task manufacturer: :environment do
     count = ENV['count'] ? ENV['count'].to_i : 50
     manufacturers = []
     progress = ProgressBar.create(title: 'Manufacturer', starting_at: 0, total: 50)
@@ -27,7 +26,7 @@ namespace :seed do
   end
 
   desc 'Seed Product'
-  task :product => :environment do
+  task product: :environment do
     count = ENV['count'] ? ENV['count'].to_i : 50
     progress = ProgressBar.create(title: 'Product', starting_at: 0, total: Manufacturer.count)
 
@@ -47,7 +46,7 @@ namespace :seed do
   end
 
   desc 'Seed Product History'
-  task :product_history => :environment do
+  task product_history: :environment do
     count = ENV['count'] ? ENV['count'].to_i : 50
     progress = ProgressBar.create(title: 'Product History', starting_at: 0, total: Product.count)
 
