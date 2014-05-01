@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-ruby "2.1.0"
+ruby "2.1.1"
 
-#ruby=ruby-2.1.0
+#ruby=ruby-2.1.1
 #ruby-gemset=Inventories
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
