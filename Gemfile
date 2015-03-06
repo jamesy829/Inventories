@@ -95,7 +95,7 @@ group :test do
 
   # Test Coverage
   gem 'simplecov', require: false
-  gem 'coveralls', require: false
+  gem 'codeclimate-test-reporter', require: nil
 end
 
 # Serve static assets and logging on Heroku

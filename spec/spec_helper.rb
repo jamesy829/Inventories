@@ -5,12 +5,11 @@ require 'spork'
 
 Spork.prefork do
   require 'simplecov'
-  require 'coveralls'
+  require "codeclimate-test-reporter"
+  CodeClimate::TestReporter.start
   SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
-    Coveralls::SimpleCov::Formatter,
     SimpleCov::Formatter::HTMLFormatter
   ]
-  Coveralls.wear!
   SimpleCov.start 'rails'
 
   # Loading more in this block will cause your tests to run faster. However,

@@ -3,6 +3,8 @@ rvm:
   - 2.1.1
 addons:
   postgresql: "9.3"
+  code_climate:
+    repo_token: f2d753ac1c93a7171db8ca99c759234dd2b47069ffdef83402e79745831f9dec
 service_name: travis-ci
 before_script:
   - psql -c 'create database inventories_test;' -U postgres
