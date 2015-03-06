@@ -1,3 +1,6 @@
+require "codeclimate-test-reporter"
+CodeClimate::TestReporter.start
+
 require 'rubygems'
 require 'spork'
 #uncomment the following line to use spork with the debugger
@@ -5,8 +8,6 @@ require 'spork'
 
 Spork.prefork do
   require 'simplecov'
-  require "codeclimate-test-reporter"
-  CodeClimate::TestReporter.start
   SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
     SimpleCov::Formatter::HTMLFormatter
   ]
